@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@flasco/pricking-koa@^0.0.1-alpha.5":
-  version "0.0.1-alpha.5"
-  resolved "https://npm.pkg.github.com/download/@flasco/pricking-koa/0.0.1-alpha.5/b75a15cf18a3c6472ed36c567e03ca46c290fb105dcba61b11da77649766c207#bbfcb82fb516754c5a03917cec0fce76440c8b49"
-  integrity sha512-GCRRTggV+sBTLzWeB2uuZWodv2141JJUX/PB6CsDPuDHLKvcAd/qsRmDV+JXW6V3N1qqNf6rMxr4/Lgr/mGiuw==
+"@flasco/pricking-koa@^0.0.1-alpha.9":
+  version "0.0.1-alpha.9"
+  resolved "https://npm.pkg.github.com/download/@flasco/pricking-koa/0.0.1-alpha.9/7535a26f842ac7e44a263c3ba3e4d897eebb9a1a44c505665072264e6e7bfeb5#f26af93563425402fc7b2602eb5ea9e83b95d94a"
+  integrity sha512-IwWGhCD/8J2EzBcKG76SLjsEjIjcCQZGTp/2LoW2J4ejuRz8CVeOZoEqx6up8HeBkL4coAMrpZ1LcX3YJYfvMQ==
   dependencies:
     "@koa/router" "^10.0.0"
     "@types/koa" "^2.11.6"
