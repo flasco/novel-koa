@@ -1,6 +1,7 @@
+import { Controller, Get } from '@flasco/pricking-koa/dist/utils/decorator';
+
 import BaseController from '@app/controllers/common/IndexController';
 import { delay } from '@app/utils';
-import { Controller, Get } from '@flasco/pricking-koa/dist/utils/decorator';
 
 @Controller('cat')
 class IndexController extends BaseController {
