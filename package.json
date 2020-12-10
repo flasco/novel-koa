@@ -34,6 +34,9 @@
     "@flasco/pricking-koa": "0.0.2-alpha.1",
     "async": "^3.2.0",
     "fs-extra": "^9.0.1",
+    "koa-compose": "^4.1.0",
+    "leancloud-storage": "^4.8.2",
+    "leanengine": "^3.7.0",
     "lru-cache": "^6.0.0",
     "module-alias": "^2.2.2",
     "tslib": "^2.0.3"
