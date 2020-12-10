@@ -182,10 +182,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@flasco/pricking-koa@^0.0.1":
-  version "0.0.1"
-  resolved "https://npm.pkg.github.com/download/@flasco/pricking-koa/0.0.1/ce520c8545e47855614f4ec1091f8fbdae55ba3f8d9d3419df7d3a84e44f5a70#8fc991eb7c0f2615548c606e2ee361d5b94b6ace"
-  integrity sha512-PPFLMUYsIX37guaW1UxMzQYyYxhSiX+jS+ztwVcRunTl5HBbq8EqK6vJT5+HJcI6RZMKEZUw09rBOzsE0YYXbA==
+"@flasco/pricking-koa@0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "https://npm.pkg.github.com/download/@flasco/pricking-koa/0.0.2-alpha.1/f43f49ea58824aba4a77d6dd1e817b209550e6cb9f65d23a8d97551f52f59e37#c48a538e24511619d6de49881e27393c4c6ab0b1"
+  integrity sha512-ebWc67SFLrtYFt3PCNkW6kCyF+ZHqwl3fuk2xPJzy5I6eF24P6eVT2LwZHtdTkJgDl4Vg+Tl8VQpSSqJmQZRVQ==
   dependencies:
     "@koa/router" "^10.0.0"
     "@types/koa" "^2.11.6"

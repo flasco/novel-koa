@@ -31,7 +31,7 @@
     "typescript": "^4.1.2"
   },
   "dependencies": {
-    "@flasco/pricking-koa": "^0.0.1",
+    "@flasco/pricking-koa": "0.0.2-alpha.1",
     "async": "^3.2.0",
     "fs-extra": "^9.0.1",
     "lru-cache": "^6.0.0",
