@@ -1,5 +1,5 @@
 import './path';
-import { PrickingApplication } from '@flasco/pricking-koa';
+import { PrickingApplication } from 'pricking-koa';
 import AV from 'leanengine';
 
 AV.init({

@@ -1,4 +1,4 @@
-import BaseController from '@flasco/pricking-koa/dist/controllers/BaseController';
+import BaseController from 'pricking-koa/dist/controllers/BaseController';
 
 class IndexController extends BaseController {}
 

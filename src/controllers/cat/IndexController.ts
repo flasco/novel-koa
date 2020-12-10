@@ -1,4 +1,4 @@
-import { Controller, Get } from '@flasco/pricking-koa/dist/utils/decorator';
+import { Controller, Get } from 'pricking-koa/dist/utils/decorator';
 
 import BaseController from '@app/controllers/common/IndexController';
 
