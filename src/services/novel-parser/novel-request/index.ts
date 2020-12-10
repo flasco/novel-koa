@@ -4,6 +4,7 @@ import { queue } from 'async';
 import LRUCache from 'lru-cache';
 
 import { delay } from '@app/utils';
+import { configDir } from '@app/constants';
 
 /**
  * 1. N个书源，N个队列
@@ -25,10 +26,9 @@ class NoverRequestCore {
   }
 
   private loadConfig() {
-    const configPath = path.resolve(__dirname, 'config');
-    const files = fse.readdirSync(configPath);
+    const files = fse.readdirSync(configDir);
     files.forEach((p) => {
-      const config = require(path.resolve(configPath, p));
+      const config = require(path.resolve(configDir, p));
       const key = config.site;
       this.configs.set(key, config);
       this.supportedSites.push(key);
@@ -57,7 +57,7 @@ class NoverRequestCore {
     const currentSite = this.supportedSites.find((i) => url.includes(i));
     if (!currentSite) return false;
     if (this.workingList[currentSite].has(url)) return true;
-    if (this.resultPool.has(url) ) return true;
+    if (this.resultPool.has(url)) return true;
     this.wrokers[currentSite].push(url);
     return true;
   }

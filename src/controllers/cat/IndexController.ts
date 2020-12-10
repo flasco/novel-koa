@@ -1,7 +1,7 @@
 import { Controller, Get } from '@flasco/pricking-koa/dist/utils/decorator';
 
 import BaseController from '@app/controllers/common/IndexController';
-import novelRequest from '@app/services/novel-request';
+import novelRequest from '@app/services/novel-parser/novel-request';
 
 @Controller('cat')
 class IndexController extends BaseController {
