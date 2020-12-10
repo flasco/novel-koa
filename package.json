@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "preinstall": "node scripts/create-npmrc.js",
     "prestart": "yarn build",
     "start": "node dist/index",
     "dev": "nodemon",
