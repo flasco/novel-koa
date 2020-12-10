@@ -27,7 +27,8 @@ class NoverRequestCore {
 
   private loadConfig() {
     const files = fse.readdirSync(configDir);
-    files.forEach((p) => {
+    files.forEach(p => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const config = require(path.resolve(configDir, p));
       const key = config.site;
       this.configs.set(key, config);
@@ -36,10 +37,10 @@ class NoverRequestCore {
       this.wrokers[key] = queue((url: string, callback) => {
         this.workingList[key].add(url);
         this.analyseContent(url)
-          .then((val) => {
+          .then(val => {
             this.resultPool.set(url, val);
           })
-          .catch(() => {})
+          .catch(() => undefined)
           .finally(() => {
             this.workingList[key].delete(url);
             callback();
@@ -54,7 +55,7 @@ class NoverRequestCore {
   }
 
   private pushTask(url: string) {
-    const currentSite = this.supportedSites.find((i) => url.includes(i));
+    const currentSite = this.supportedSites.find(i => url.includes(i));
     if (!currentSite) return false;
     if (this.workingList[currentSite].has(url)) return true;
     if (this.resultPool.has(url)) return true;

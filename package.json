@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts --files",
+    "lint": "eslint src",
     "build": "rm -rf dist && tsc --project tsconfig.prod.json"
   },
   "devDependencies": {
