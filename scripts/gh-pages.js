@@ -14,6 +14,7 @@ function main() {
     {
       branch: 'gh-pages',
       dotfiles: true,
+      repo: 'https://github.com/flasco/novel-pricking.git'
     },
     () => spinner.succeed()
   );
