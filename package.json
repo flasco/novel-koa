@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts --files",
+    "prestart": "yarn build",
+    "start": "node dist/index",
+    "dev": "nodemon",
     "lint": "eslint src",
-    "build": "rm -rf dist && tsc --project tsconfig.prod.json"
+    "build": "rm -rf dist && tsc --project tsconfig.prod.json && cp -r ./src/config/ ./dist/config/"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
@@ -22,6 +24,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.5",
     "lint-staged": "^10.5.3",
+    "nodemon": "^2.0.6",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.2"

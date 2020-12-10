@@ -18,6 +18,7 @@ export = async (ctx, next) => {
       };
       console.error(JSON.stringify(errorObj, null, 2));
     }
+    console.error(error);
 
     ctx.fail(error.msg || error.message);
   }
