@@ -1,14 +1,17 @@
 import { Controller, Get } from '@flasco/pricking-koa/dist/utils/decorator';
 
 import BaseController from '@app/controllers/common/IndexController';
-import { delay } from '@app/utils';
+import novelRequest from '@app/services/novel-request';
 
 @Controller('cat')
 class IndexController extends BaseController {
+  nrc = novelRequest;
+  
   @Get('say')
   async speak() {
-    await delay(1000);
-    this.ctx.success({ e: 123 });
+    const { query } = this.ctx;
+    const result = await this.nrc.push(query.url);
+    this.ctx.success(result);
   }
 }
 
