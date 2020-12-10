@@ -11,6 +11,9 @@
     "lint": "eslint src",
     "build": "rm -rf dist && tsc --project tsconfig.prod.json && cp -r ./src/config/ ./dist/config/"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
