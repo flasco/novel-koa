@@ -1,0 +1,28 @@
+{
+  "include": ["./src", "./node_modules/@types"],
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./local",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "importHelpers": true,
+    "jsx": "preserve",
+    "alwaysStrict": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictNullChecks": false,
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["./src/*"]
+    }
+  },
+}
