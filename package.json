@@ -4,10 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/index",
     "dev": "nodemon",
     "lint": "eslint src",
-    "build": "rm -rf ./builder && mkdir ./builder && cp ./*.* ./builder && cp ./.gitign* ./builder && tsc --project tsconfig.prod.json && cp -r ./src/config/ ./builder/dist/config/"
+    "build": "tsc --project tsconfig.prod.json"
   },
   "engines": {
     "node": "12.x"
