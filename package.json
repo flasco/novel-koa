@@ -29,8 +29,7 @@
     "lint-staged": "^10.5.3",
     "nodemon": "^2.0.6",
     "prettier": "^2.2.1",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.1.2"
+    "ts-node": "^9.1.1"
   },
   "dependencies": {
     "pricking-koa": "0.0.2-alpha.1",
@@ -41,7 +40,8 @@
     "leanengine": "^3.7.0",
     "lru-cache": "^6.0.0",
     "module-alias": "^2.2.2",
-    "tslib": "^2.0.3"
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.2"
   },
   "husky": {
     "hooks": {
