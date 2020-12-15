@@ -40,7 +40,7 @@
     "leanengine": "^3.7.0",
     "lru-cache": "^6.0.0",
     "module-alias": "^2.2.2",
-    "pricking-koa": "0.0.2-alpha.1",
+    "pricking-koa": "0.0.2-alpha.2",
     "tslib": "^2.0.3"
   },
   "husky": {
