@@ -6,15 +6,16 @@ import nrc from './novel-request';
 
 import { craw, postCrawl } from '@app/utils/request';
 import { htmlAnalysis } from '@app/utils/quert';
+import { ISiteConfig } from '@app/definitions/config';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 iconv.skipDecodeWarning = true;
 
 class BaseParser {
-  config: Record<string, any>;
+  config: ISiteConfig;
 
-  constructor(config: Record<string, any>) {
+  constructor(config: ISiteConfig) {
     this.config = config;
     if (!this.config) throw Error('unsupported site');
   }
