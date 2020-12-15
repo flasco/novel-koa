@@ -1,45 +1,39 @@
-import fse from 'fs-extra';
-import path from 'path';
-import { queue } from 'async';
+import { queue, QueueObject } from 'async';
 import LRUCache from 'lru-cache';
 
 import { delay } from '@app/utils';
-import { configDir } from '@app/constants';
+import { configMap, supportedSites } from '@app/config';
+import { craw } from '@app/utils/request';
 
 /**
  * 1. N个书源，N个队列
  * 2. 限制并发数量
  */
 
+const MAX_POOL_SIZE = 10000;
+const MAX_POOL_AGE = 2 * 60 * 60;
+
+const MAX_TASK_SIZE = Math.floor((MAX_POOL_SIZE / configMap.size) * 0.67);
+
 class NoverRequestCore {
-  private wrokers = {};
+  private wrokers: Record<string, QueueObject<string>> = {};
   private workingList: Record<string, Set<string>> = {};
-  private configs = new Map();
-  private supportedSites: string[] = [];
-  private resultPool = new LRUCache({
-    max: 10000,
-    maxAge: 4 * 60 * 60,
+  private resultPool = new LRUCache<string, Buffer>({
+    max: MAX_POOL_SIZE,
+    maxAge: MAX_POOL_AGE,
   });
 
   constructor() {
-    this.loadConfig();
+    this.init();
   }
 
-  private loadConfig() {
-    const files = fse.readdirSync(configDir);
-    files.forEach(p => {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const config = require(path.resolve(configDir, p));
-      const key = config.site;
-      this.configs.set(key, config);
-      this.supportedSites.push(key);
+  private init() {
+    configMap.forEach((config, key) => {
       this.workingList[key] = new Set<string>();
       this.wrokers[key] = queue((url: string, callback) => {
         this.workingList[key].add(url);
         this.analyseContent(url)
-          .then(val => {
-            this.resultPool.set(url, val);
-          })
+          .then(val => this.resultPool.set(url, val))
           .catch(() => undefined)
           .finally(() => {
             this.workingList[key].delete(url);
@@ -50,22 +44,23 @@ class NoverRequestCore {
   }
 
   private async analyseContent(url: string) {
-    await delay(6000);
-    return url;
+    return craw(url, 5000);
   }
 
   private pushTask(url: string) {
-    const currentSite = this.supportedSites.find(i => url.includes(i));
-    if (!currentSite) return false;
+    const currentSite = supportedSites.find(i => url.includes(i));
+    if (!currentSite) throw new Error('task create failed, unsupported site');
     if (this.workingList[currentSite].has(url)) return true;
     if (this.resultPool.has(url)) return true;
+    if (this.wrokers[currentSite].length() > MAX_TASK_SIZE) {
+      throw new Error('task create failed, over limit');
+    }
     this.wrokers[currentSite].push(url);
     return true;
   }
 
   async push(url: string) {
-    const isSuccess = this.pushTask(url);
-    if (!isSuccess) throw new Error('task create failed');
+    this.pushTask(url);
     for (let i = 0; i < 6; i++) {
       const result = this.resultPool.get(url);
       if (result) return result;

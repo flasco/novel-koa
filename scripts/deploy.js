@@ -10,7 +10,6 @@ function main() {
   execSync('rm -rf ./builder');
   execSync('yarn build');
   execSync('cp ./*.* ./builder && cp ./.gitign* ./builder');
-  execSync('cp -r ./src/config/ ./builder/dist/config/');
 
   spinner1.succeed();
   const pkgPath = path.resolve(__dirname, '../builder/package.json');
