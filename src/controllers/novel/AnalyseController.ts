@@ -1,4 +1,4 @@
-import { Controller, Description, Get, Post } from 'pricking-koa/dist/utils/decorator';
+import { Controller, Description, Get, Post } from 'pricking-koa';
 
 import BaseController from '@app/controllers/common/IndexController';
 import NovelServices from '@app/services/novel-parser';
