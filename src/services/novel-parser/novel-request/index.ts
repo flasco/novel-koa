@@ -2,7 +2,7 @@ import { queue, QueueObject } from 'async';
 import LRUCache from 'lru-cache';
 
 import { delay } from '@app/utils';
-import { configMap, supportedSites } from '@app/config';
+import { configMap, supportedSites } from '@app/constants';
 import { craw } from '@app/utils/request';
 
 /**

@@ -1,4 +1,4 @@
-import { configMap, supportedSites } from '@app/config';
+import { configMap, supportedSites } from '@app/constants';
 
 import Parser from './parser';
 
