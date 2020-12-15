@@ -43,7 +43,7 @@ function formatX(inst: string, $: cheerio.Cheerio) {
     }
   }
 
-  return '';
+  return $;
 }
 
 function formatLatest(key: string, $: cheerio.Cheerio) {
