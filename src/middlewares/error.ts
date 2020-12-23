@@ -1,4 +1,4 @@
-export = async (ctx, next) => {
+export = () => async (ctx, next) => {
   try {
     await next();
   } catch (error) {

@@ -15,7 +15,8 @@ if (process.env.LEANCLOUD_APP_ID) {
 const PORT = +(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3001);
 
 new PrickingApplication({
-  baseUrl: __dirname,
+  rootPath: __dirname,
   port: PORT,
   env: 'development',
+  // debug: true,
 });

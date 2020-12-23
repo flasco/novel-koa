@@ -1,4 +1,4 @@
 import compose from 'koa-compose';
 import AV from 'leanengine';
 
-export = compose([AV.koa2()]);
+export = () => compose([AV.koa2()]);
