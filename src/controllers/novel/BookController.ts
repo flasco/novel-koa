@@ -7,7 +7,10 @@ class AnalyseController extends BaseController {
   @Get('/info')
   @Description('查询书籍详情')
   async getBookInfo() {
-    this.ctx.success({});
+    const currentTime = new Date().toDateString();
+    await this.ctx.render('home', {
+      currentTime,
+    });
   }
 
   @Get('/search')

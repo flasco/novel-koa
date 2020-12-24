@@ -18,5 +18,5 @@ new PrickingApplication({
   rootPath: __dirname,
   port: PORT,
   env: 'development',
-  // debug: true,
+  // mode: AppMode.Test,
 });
