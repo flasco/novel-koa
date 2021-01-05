@@ -5,7 +5,7 @@ import path from 'path';
 const application = new PrickingApplication({
   rootPath: path.resolve(__dirname, '../../src'),
   env: 'development',
-  port: 8888,
+  port: 0,
   mode: AppMode.Test,
 });
 

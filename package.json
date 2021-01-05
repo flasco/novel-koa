@@ -7,7 +7,7 @@
     "dev": "nodemon",
     "lint": "eslint src",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
-    "test-c": "yarn test --coverage && open coverage/lcov-report/index.html",
+    "test-c": "yarn test --slient --coverage && open coverage/lcov-report/index.html",
     "build": "tsc --project tsconfig.prod.json"
   },
   "engines": {
@@ -54,7 +54,7 @@
     "leanengine": "^3.7.0",
     "lru-cache": "^6.0.0",
     "module-alias": "^2.2.2",
-    "pricking-koa": "0.0.2-alpha.7",
+    "pricking-koa": "0.0.2-alpha.8",
     "tslib": "^2.0.3",
     "urlencode": "^1.1.0"
   },
