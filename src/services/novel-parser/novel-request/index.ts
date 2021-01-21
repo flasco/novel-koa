@@ -11,7 +11,7 @@ import { craw } from '@app/utils/request';
  */
 
 const MAX_POOL_SIZE = 10000;
-const MAX_POOL_AGE = 2 * 60 * 60;
+const MAX_POOL_AGE = 2 * 60 * 60 * 1000;
 
 const MAX_TASK_SIZE = Math.floor((MAX_POOL_SIZE / configMap.size) * 0.67);
 

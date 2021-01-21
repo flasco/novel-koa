@@ -1,5 +1,5 @@
 import './path';
-import { PrickingApplication } from 'pricking-koa';
+import { AppMode, PrickingApplication } from 'pricking-koa';
 import AV from 'leanengine';
 
 AV.init({
@@ -18,5 +18,5 @@ new PrickingApplication({
   rootPath: __dirname,
   port: PORT,
   env: 'development',
-  // mode: AppMode.Test,
+  mode: AppMode.Debug,
 });

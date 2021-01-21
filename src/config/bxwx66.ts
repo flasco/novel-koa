@@ -1,5 +1,5 @@
 export = {
-  site: 'http://www.bxwx66.com',
+  site: 'www.bxwx66.com',
   charset: 'UTF-8',
   search: {
     method: 'post',
