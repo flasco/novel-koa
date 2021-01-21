@@ -10,16 +10,18 @@ class AnalyseController extends BaseController {
   @Get('/info')
   @Description('查询书籍详情')
   async getBookInfo() {
-    const currentTime = new Date().toDateString();
-    await this.ctx.render('home', {
-      currentTime,
-    });
+    const { url } = this.ctx.query;
+
+    const result = await this.novelServices.getBookInfo(url);
+    this.ctx.success(result);
   }
 
   @Post('/infos')
   @Description('批量查询书籍详情')
   async getBookInfos() {
-    const { sources = [] } = this.ctx.request.body;
+    const { body: sources = [] } = this.ctx.request;
+
+    this.validator.isNumber(sources.length, '不符合规则的参数');
 
     const results = await this.novelServices.getBookInfos(sources);
     this.ctx.success(results);
@@ -28,14 +30,18 @@ class AnalyseController extends BaseController {
   @Get('/search')
   @Description('搜索')
   async searchBook() {
-    this.ctx.success({});
+    const { keyword } = this.ctx.query;
+    this.validator.required(keyword, '请输入关键字');
+
+    const result = await this.novelServices.searchBook(keyword);
+    this.ctx.success(result);
   }
 
-  @Post('/origin')
-  @Description('查询书籍书源详情')
-  async getBookOriginDetail() {
-    this.ctx.success({});
-  }
+  // @Post('/origin')
+  // @Description('查询书籍书源详情')
+  // async getBookOriginDetail() {
+  //   return this.getBookInfos();
+  // }
 }
 
 export = AnalyseController;

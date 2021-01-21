@@ -6,6 +6,7 @@ import nrc from './novel-request';
 
 import { htmlAnalysis } from '@app/utils/quert';
 import { ISiteConfig } from '@app/definitions/config';
+import { ISearchItem } from '@app/definitions/novel';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -126,7 +127,8 @@ class BaseParser {
     } else {
       res = await this.getPageContent(searchUrl);
     }
-    const searchList = [];
+
+    const searchList: ISearchItem[] = [];
     const list = htmlAnalysis(res, search.bookList);
     for (let i = 0; i < list.length; i++) {
       const item = list[i];
@@ -135,8 +137,8 @@ class BaseParser {
       const href = htmlAnalysis(item, search.bookUrl) as string;
       if (href == null || name.length < 1) continue;
       const payload = {
-        name,
-        url: URL.resolve(searchUrl, href),
+        bookName: name,
+        bookUrl: URL.resolve(searchUrl, href),
         author,
         latestChapter: undefined,
       };
@@ -161,6 +163,7 @@ class BaseParser {
       name: htmlAnalysis(base, name),
       author: htmlAnalysis(base, author),
       image: URL.resolve(this.config.site, htmlAnalysis(base, imageUrl) as string),
+      url,
       catalogUrl: url,
     };
 

@@ -1,5 +1,5 @@
 import { configMap, supportedSites } from '@app/constants';
-import { ILatestChaptersReqListItem } from '@app/definitions/novel';
+import { ILatestChaptersReqListItem, ISearchItem, ISearchRetItem } from '@app/definitions/novel';
 
 import Parser from './parser';
 
@@ -11,14 +11,55 @@ const initParserMap = () => {
   return parserMap;
 };
 
+const initSearchParser = (parserMap: Map<string, Parser>) => {
+  const mapper: Parser[] = [];
+  parserMap.forEach(value => {
+    if (value.canSearch) mapper.push(value);
+  });
+
+  return mapper;
+};
+
+const parserMap = initParserMap();
+const searchParsers = initSearchParser(parserMap);
+
 /** 默认 url 都是经过 supported site 判断的 */
 class NovelServices {
-  private readonly parserMap = initParserMap();
-
   private getParser = (url: string) => {
     const currentSite = supportedSites.find(i => url.includes(i));
-    return this.parserMap.get(currentSite);
+    return parserMap.get(currentSite);
   };
+
+  public async searchBook(keyword: string) {
+    const workArr = searchParsers.map(parser =>
+      parser.search(keyword).catch(() => [] as ISearchItem[])
+    );
+
+    const resultArr = await Promise.all(workArr);
+    const result: ISearchRetItem[] = [];
+    const nameMap = new Map<string, number>();
+    let ptr = 0;
+
+    resultArr.forEach(items =>
+      items.forEach(item => {
+        const uniqueKey = `${item.bookName}${item.author}`;
+        const position = nameMap.get(uniqueKey);
+        if (position == null) {
+          nameMap.set(uniqueKey, ptr);
+          result[ptr++] = {
+            bookName: item.bookName,
+            author: item.author,
+            plantformId: 0,
+            source: [item.bookUrl],
+          };
+        } else {
+          result[position].source.push(item.bookUrl);
+        }
+      })
+    );
+
+    return result;
+  }
 
   /** 获取书籍目录 */
   public async analyseList(url: string) {
@@ -78,10 +119,22 @@ class NovelServices {
     return this.getParser(url).getBookDetail(url);
   }
 
-  /** 批量获取书籍信息 */
-  public async getBookInfos(sources: any[]) {
-    // return this.getParser(url).getBookDetail(url);
-    return sources;
+  /** 批量获取书籍信息，包括最新章节 */
+  public async getBookInfos(sources: string[]) {
+    const stamp = Date.now();
+    const workArr = sources.map((url, index) =>
+      this.getBookInfo(url)
+        .then((info: any) => {
+          info.plantformId = index;
+          info.stamp = Date.now() - stamp;
+          return info;
+        })
+        .catch(() => null)
+    );
+
+    const results = await Promise.all(workArr);
+
+    return results.filter(i => !!i).sort((a, b) => a.stamp - b.stamp);
   }
 }
 
