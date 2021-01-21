@@ -4,7 +4,6 @@ import urlencode from 'urlencode';
 
 import nrc from './novel-request';
 
-import { craw, postCrawl } from '@app/utils/request';
 import { htmlAnalysis } from '@app/utils/quert';
 import { ISiteConfig } from '@app/definitions/config';
 
@@ -20,14 +19,29 @@ class BaseParser {
     if (!this.config) throw Error('unsupported site');
   }
 
-  async getPageContent(url: string, { inQueue = true, timeout = 5000 } = {}) {
-    const res = inQueue ? await nrc.push(url) : await craw(url, timeout);
+  async getPageContent(url: string, { useCache = true } = {}) {
+    const res = await nrc.push(
+      {
+        url,
+        method: 'get',
+        timeout: 5000,
+      },
+      useCache
+    );
     return iconv.decode(res, this.config.charset);
   }
 
   async getPostContent(url: string, timeout = 5000) {
     const [newUrl, qstring] = url.split('?');
-    const res = await postCrawl(newUrl, qstring, timeout);
+    const res = await nrc.push(
+      {
+        method: 'post',
+        url: newUrl,
+        data: qstring,
+        timeout,
+      },
+      true
+    );
     return iconv.decode(res, this.config.charset);
   }
 
@@ -110,7 +124,7 @@ class BaseParser {
     if (method === 'post') {
       res = await this.getPostContent(searchUrl, 8000);
     } else {
-      res = await this.getPageContent(searchUrl, { inQueue: false, timeout: 8000 });
+      res = await this.getPageContent(searchUrl, { useCache: false });
     }
     const searchList = [];
     const list = htmlAnalysis(res, search.bookList);
