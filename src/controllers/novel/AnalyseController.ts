@@ -45,9 +45,10 @@ class AnalyseController extends BaseController {
 
   @Post('/latest-chapters')
   @Description('批量获取最新章节')
-  async updateBookShelf() {
-    const { body } = this.ctx.request;
-    const result = await this.novelServices.analyseLatestChapters(body);
+  async getLatestChapters() {
+    const { body: list } = this.ctx.request;
+    this.validator.isNumber(list.length, '不符合规则的参数');
+    const result = await this.novelServices.analyseLatestChapters(list);
 
     this.ctx.success(result);
   }

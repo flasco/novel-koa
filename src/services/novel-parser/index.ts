@@ -1,4 +1,5 @@
 import { configMap, supportedSites } from '@app/constants';
+import { ILatestChaptersReqListItem } from '@app/definitions/novel';
 
 import Parser from './parser';
 
@@ -19,27 +20,65 @@ class NovelServices {
     return this.parserMap.get(currentSite);
   };
 
+  /** 获取书籍目录 */
   public async analyseList(url: string) {
     return this.getParser(url).getChapterList(url);
   }
 
+  /** 获取章节内容 */
   public async analyseChapter(url: string) {
     return this.getParser(url).getChapterDetail(url);
   }
 
+  /** 获取最新章节 */
   public async analyseLatestChapter(url: string) {
     return this.getParser(url).getLatestChapter(url);
   }
 
-  /** TODO: 待修改 */
-  public async analyseLatestChapters(url: string) {
-    return this.getParser(url).getChapterList(url);
+  /** 批量获取最新章节 */
+  public async analyseLatestChapters(list: ILatestChaptersReqListItem[]) {
+    const resLst = await Promise.all(
+      list.map(i => this.analyseLatestChapter(i.url).catch(() => null))
+    );
+
+    const workQueue = [];
+    const markList = [];
+
+    const result = resLst.map((item, index) => {
+      const listItem = list[index];
+      if (item != null && item !== listItem.title) {
+        const catalogUrl = listItem.fullUrl || listItem.url;
+        workQueue.push(this.analyseList(catalogUrl).catch(() => null));
+        markList.push(index);
+        return {
+          title: item,
+          list: [],
+        };
+      } else {
+        return null;
+      }
+    });
+
+    const lists = await Promise.all(workQueue);
+
+    lists.forEach(curList => {
+      const index = markList.shift();
+      if (curList != null) {
+        result[index].list = curList;
+      } else {
+        result[index] = null;
+      }
+    });
+
+    return result;
   }
 
+  /** 获取书籍信息 */
   public async getBookInfo(url: string) {
     return this.getParser(url).getBookDetail(url);
   }
 
+  /** 批量获取书籍信息 */
   public async getBookInfos(sources: any[]) {
     // return this.getParser(url).getBookDetail(url);
     return sources;
