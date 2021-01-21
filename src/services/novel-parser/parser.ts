@@ -134,7 +134,8 @@ class BaseParser {
     return searchList;
   }
 
-  async getDetail(url: string) {
+  /** 获取书籍详情 */
+  async getBookDetail(url: string) {
     const { latest, description, imageUrl, catalogUrl, author, name } = this.config.detail;
     const res = await this.getPageContent(url);
 

@@ -20,24 +20,29 @@ class NovelServices {
   };
 
   public async analyseList(url: string) {
-    const parser = this.getParser(url);
-    return parser.getChapterList(url);
+    return this.getParser(url).getChapterList(url);
   }
 
   public async analyseChapter(url: string) {
-    const parser = this.getParser(url);
-    return parser.getChapterDetail(url);
+    return this.getParser(url).getChapterDetail(url);
   }
 
   public async analyseLatestChapter(url: string) {
-    const parser = this.getParser(url);
-    return parser.getLatestChapter(url);
+    return this.getParser(url).getLatestChapter(url);
   }
 
   /** TODO: 待修改 */
   public async analyseLatestChapters(url: string) {
-    const parser = this.getParser(url);
-    return parser.getChapterList(url);
+    return this.getParser(url).getChapterList(url);
+  }
+
+  public async getBookInfo(url: string) {
+    return this.getParser(url).getBookDetail(url);
+  }
+
+  public async getBookInfos(sources: any[]) {
+    // return this.getParser(url).getBookDetail(url);
+    return sources;
   }
 }
 

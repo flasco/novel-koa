@@ -5506,10 +5506,10 @@ pretty@^2.0.0:
     extend-shallow "^2.0.1"
     js-beautify "^1.6.12"
 
-pricking-koa@0.0.2-alpha.8:
-  version "0.0.2-alpha.8"
-  resolved "https://registry.npm.taobao.org/pricking-koa/download/pricking-koa-0.0.2-alpha.8.tgz?cache=0&sync_timestamp=1609838528434&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpricking-koa%2Fdownload%2Fpricking-koa-0.0.2-alpha.8.tgz#3c56be5676a8cfb5c46db54c8212bb8b9289b18b"
-  integrity sha1-PFa+Vnaoz7XEbbVMghK7i5KJsYs=
+pricking-koa@0.0.2-alpha.9:
+  version "0.0.2-alpha.9"
+  resolved "https://registry.npm.taobao.org/pricking-koa/download/pricking-koa-0.0.2-alpha.9.tgz#cfa5eca1b6f75dadbc02c9621a6670c1016db4de"
+  integrity sha1-z6Xsobb3Xa28AsliGmZwwQFttN4=
   dependencies:
     "@koa/router" "^10.0.0"
     "@types/koa" "^2.11.6"

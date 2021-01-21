@@ -11,7 +11,7 @@
     "build": "tsc --project tsconfig.prod.json"
   },
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
@@ -54,7 +54,7 @@
     "leanengine": "^3.7.0",
     "lru-cache": "^6.0.0",
     "module-alias": "^2.2.2",
-    "pricking-koa": "0.0.2-alpha.8",
+    "pricking-koa": "0.0.2-alpha.9",
     "tslib": "^2.0.3",
     "urlencode": "^1.1.0"
   },
