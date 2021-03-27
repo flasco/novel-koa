@@ -7,7 +7,6 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "outDir": "./local",
     "esModuleInterop": true,
     "allowJs": true,
     "importHelpers": true,
@@ -24,5 +23,5 @@
     "paths": {
       "@app/*": ["./src/*"]
     }
-  },
+  }
 }

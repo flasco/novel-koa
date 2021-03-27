@@ -1,4 +1,3 @@
-import './path';
 import { AppMode, PrickingApplication } from 'pricking-koa';
 import AV from 'leanengine';
 

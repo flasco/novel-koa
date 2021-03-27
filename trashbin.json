@@ -1,0 +1,18 @@
+{
+	"packageName": "novel-pricking",
+	"trashbinPath": "https://gitee.com/flasco/pricking-novel-dist.git",
+	"include": [
+		"dist/*",
+		"yarn.lock",
+		"package.json",
+		"README.md"
+	],
+	"commit": [
+		"\t{#PACKAGE#} 构建\n",
+		"\ttime:     {#TIME#}\n",
+		"\tbuild:    {#BUILDER#}\n",
+		"\tbranch:   {#BRANCH#}\n",
+		"\tmessage:  {#COMMIT_MSG#}\n"
+	],
+	"removeDevDeps": true
+}
