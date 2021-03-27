@@ -1,9 +1,9 @@
 export = {
-  site: 'www.qiuxiaoshuo.org',
+  site: 'www.81ht.com',
   charset: 'gbk',
   search: {
     method: 'get',
-    pattern: 'https://www.qiuxiaoshuo.org/search.htm?keyword=${key}',
+    pattern: 'http://www.81ht.com/search.htm?keyword=${key}',
     closeEncode: true,
     bookList: 'id.novel-list@tag.li',
     bookUrl: 'tag.div:nth-child(2)@tag.a@href',
@@ -26,6 +26,6 @@ export = {
   },
   chapter: {
     title: 'tag.h1@text',
-    content: 'id.txtContent@text',
+    content: 'id.txtContent@text##请记住本书.*.com',
   },
 };

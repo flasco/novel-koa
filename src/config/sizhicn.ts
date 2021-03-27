@@ -1,9 +1,9 @@
 export = {
-  site: 'www.shuquge.com',
+  site: 'www.sizhicn.com',
   charset: 'utf-8',
   search: {
     method: 'post',
-    pattern: 'http://www.shuquge.com/search.php?searchkey=${key}',
+    pattern: 'http://www.sizhicn.com/search.php?searchkey=${key}',
     bookList: 'class.bookbox',
     bookName: 'class.bookname@text',
     bookUrl: 'class.bookname@tag.a@href',

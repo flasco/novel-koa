@@ -43,7 +43,7 @@ class AnalyseController extends BaseController {
     this.ctx.success(result);
   }
 
-  @Post('/latest-chapters')
+  @Post('/batch-latest-chapters')
   @Description('批量获取最新章节')
   async getLatestChapters() {
     const { body: list } = this.ctx.request;

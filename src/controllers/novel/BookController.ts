@@ -36,12 +36,6 @@ class AnalyseController extends BaseController {
     const result = await this.novelServices.searchBook(keyword);
     this.ctx.success(result);
   }
-
-  // @Post('/origin')
-  // @Description('查询书籍书源详情')
-  // async getBookOriginDetail() {
-  //   return this.getBookInfos();
-  // }
 }
 
 export = AnalyseController;

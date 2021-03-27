@@ -86,10 +86,11 @@ class NoverRequestCore {
 
   async push(payload: IPayload, useCache = true) {
     this.pushTask(payload, useCache);
-    for (let i = 0; i < 6; i++) {
+    const fetchCnt = Math.round((payload.timeout ?? 5000) / 500);
+    for (let i = 0; i < fetchCnt; i++) {
       const result = this.resultPool.get(this.getUniqueKey(payload));
       if (result) return result;
-      await delay(600);
+      await delay(500);
     }
 
     throw new Error('wait timeout');
