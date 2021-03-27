@@ -1,10 +1,15 @@
-import { Controller, Description, Get } from 'pricking-koa';
+import { Controller, Description, Get, Index } from 'pricking-koa';
 
 import BaseController from '@app/controllers/base/IndexController';
 import { craw } from '@app/utils/request';
 
 @Controller('/v3/others')
 class AnalyseController extends BaseController {
+  @Index(['/apidoc'])
+  async getApiDocHTML() {
+    await this.ctx.render('api');
+  }
+
   @Get('/site-map')
   @Description('当前源')
   async getChapter() {

@@ -9,7 +9,7 @@
     "lint": "eslint src",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
     "test-c": "yarn test --slient --coverage && open coverage/lcov-report/index.html",
-    "build": "yarn tsc -p tsconfig.build.json && yarn tscpaths -p tsconfig.build.json -s ./src -o ./dist",
+    "build": "yarn tsc -p tsconfig.build.json && yarn tscpaths -p tsconfig.build.json -s ./src -o ./dist/src",
     "deploy": "trashbin run"
   },
   "engines": {
@@ -39,6 +39,7 @@
     "supertest": "^6.0.1",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.9.0",
     "tscpaths": "^0.0.9",
     "typescript": "^4.1.2",
     "zan-trashbin": "^1.0.0"

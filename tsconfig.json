@@ -23,5 +23,8 @@
     "paths": {
       "@app/*": ["./src/*"]
     }
+  },
+  "ts-node": {
+    "transpileOnly": true
   }
 }
