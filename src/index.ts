@@ -1,4 +1,4 @@
-import { AppMode, PrickingApplication } from 'pricking-koa';
+import { PrickingApplication } from 'pricking-koa';
 import AV from 'leanengine';
 
 AV.init({
@@ -16,6 +16,6 @@ const PORT = +(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3001);
 new PrickingApplication({
   rootPath: __dirname,
   port: PORT,
-  env: 'development',
-  mode: AppMode.Debug,
+  env: process.env.APP_ENV,
+  mode: +process.env.APP_MODE,
 });
