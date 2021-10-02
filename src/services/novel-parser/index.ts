@@ -48,7 +48,7 @@ class NovelServices {
       items.forEach(item => {
         const { bookName, bookUrl, author } = item;
         // 如果是当前不支持的书源就直接滤掉
-        if (!supportedSites.includes(bookUrl)) {
+        if (!supportedSites.some(site => bookUrl.includes(site))) {
           return;
         }
 

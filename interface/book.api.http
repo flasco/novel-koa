@@ -1,0 +1,15 @@
+@apiDomain = localhost:3001
+###
+
+GET http://{{apiDomain}}/v3/books/api/info
+  ?url=https://www.19zw.com/78_78334/
+
+###
+POST http://{{apiDomain}}/v3/books/api/infos
+Content-Type: application/json
+
+["https://www.19zw.com/78_78334/"]
+
+###
+GET http://{{apiDomain}}/v3/books/api/search
+  ?keyword=我欲封天
