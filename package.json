@@ -9,7 +9,7 @@
     "lint": "eslint src",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
     "test-c": "yarn test --slient --coverage && open coverage/lcov-report/index.html",
-    "build": "yarn tsc -p tsconfig.build.json && yarn tscpaths -p tsconfig.build.json -s ./src -o ./dist/src",
+    "build": "ts-node ./scripts/build.ts",
     "deploy": "trashbin run"
   },
   "engines": {
@@ -35,7 +35,6 @@
     "jest": "^26.6.3",
     "lint-staged": "^10.5.3",
     "nodemon": "^2.0.6",
-    "ora": "^5.1.0",
     "prettier": "^2.2.1",
     "supertest": "^6.0.1",
     "ts-jest": "^26.4.4",
@@ -43,12 +42,13 @@
     "tsconfig-paths": "^3.9.0",
     "tscpaths": "^0.0.9",
     "typescript": "^4.4.3",
-    "zan-trashbin": "^1.0.1-beta.1"
+    "zan-trashbin": "^1.0.1-beta.1",
+    "zx": "^4.2.0"
   },
   "dependencies": {
     "async": "^3.2.0",
-    "axios": "^0.21.0",
-    "cheerio": "^1.0.0-rc.3",
+    "axios": "^0.22.0",
+    "cheerio": "^1.0.0-rc.10",
     "fs-extra": "^9.0.1",
     "iconv-lite": "^0.6.2",
     "koa-compose": "^4.1.0",
