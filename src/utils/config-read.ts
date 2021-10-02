@@ -2,8 +2,15 @@ import { normalCraw } from './request';
 import fs from 'fs';
 import path from 'path';
 
+const getlatestSha = async () => {
+  const result = await normalCraw(
+    'https://api.github.com/repos/flasco/origin-dist/branches/master'
+  );
+
+  return result.commit.sha;
+};
 const getConfigContent = async () => {
-  const sha = '9179d360fd5dcc9325fcb8ae8d98683b0d5c34b0';
+  const sha = await getlatestSha();
   const result = await normalCraw(
     `https://api.github.com/repos/flasco/origin-dist/git/trees/${sha}`
   );

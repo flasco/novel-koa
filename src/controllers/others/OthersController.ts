@@ -8,7 +8,7 @@ import NovelService from '@app/services/novel-parser';
 class AnalyseController extends BaseController {
   novelService = new NovelService();
 
-  @Index(['/apidoc'])
+  @Index(['/api-doc'])
   async getApiDocHTML() {
     await this.ctx.render('api');
   }

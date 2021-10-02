@@ -30,7 +30,7 @@ export async function postCrawl(url: string, payload: any, timeout = 5000) {
     });
     return result.data;
   } catch (error) {
-    console.trace(error.message);
+    console.trace(error.message, url, payload);
     throw new Error(`postCrawl failed, ${error.message}`);
   }
 }
@@ -42,20 +42,19 @@ export async function craw(url: string, timeout = 5000) {
     });
     return result.data;
   } catch (error) {
-    console.trace(error.message);
+    console.trace(error.message, url);
     throw new Error(`craw failed, ${error.message}`);
   }
 }
 
 export async function normalCraw<T = any>(url: string, timeout = 5000) {
-  console.log(url);
   try {
     const result = await axios.get<T>(url, {
       cancelToken: getSource(timeout),
     });
     return result.data;
   } catch (error) {
-    console.trace(error.message);
+    console.trace(error.message, url);
     throw error;
   }
 }

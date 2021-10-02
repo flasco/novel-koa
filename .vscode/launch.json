@@ -11,9 +11,10 @@
       "args": [
         "${workspaceRoot}/src/index.ts" // 入口文件
       ],
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register", "-r", "tsconfig-paths/register"],
       "sourceMaps": true,
       "cwd": "${workspaceRoot}",
+      "runtimeVersion": "14",
       "protocol": "inspector",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
