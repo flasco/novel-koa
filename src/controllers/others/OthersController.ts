@@ -5,7 +5,7 @@ import { craw } from '@app/utils/request';
 import NovelService from '@app/services/novel-parser';
 
 @Controller('/v3/others')
-class AnalyseController extends BaseController {
+class OthersController extends BaseController {
   novelService = new NovelService();
 
   @Index(['/api-doc'])
@@ -32,4 +32,4 @@ class AnalyseController extends BaseController {
   }
 }
 
-export = AnalyseController;
+export = OthersController;

@@ -41,7 +41,7 @@ class NoverRequestCore {
         const uniqueKey = this.getUniqueKey(payload);
 
         this.workingList[key].add(url);
-        this.analyseContent(payload)
+        this.analyzeContent(payload)
           .then(val => this.resultPool.set(uniqueKey, val))
           .catch(() => undefined)
           .finally(() => {
@@ -52,7 +52,7 @@ class NoverRequestCore {
     });
   };
 
-  private async analyseContent(payload: IPayload) {
+  private async analyzeContent(payload: IPayload) {
     const { url, data, timeout = 5000, method } = payload;
     if (method === 'get') {
       return craw(url, timeout);
