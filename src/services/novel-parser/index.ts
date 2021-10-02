@@ -1,15 +1,7 @@
-import { configMap, supportedSites } from '@app/constants';
+import ConfigCenter from '@app/config-center';
 import { ILatestChaptersReqListItem, ISearchItem, ISearchRetItem } from '@app/definitions/novel';
 
 import Parser from './parser';
-
-const initParserMap = () => {
-  const parserMap = new Map<string, Parser>();
-  supportedSites.forEach(key => {
-    parserMap.set(key, new Parser(configMap.get(key)));
-  });
-  return parserMap;
-};
 
 const initSearchParser = (parserMap: Map<string, Parser>) => {
   const mapper: Parser[] = [];
@@ -22,20 +14,26 @@ const initSearchParser = (parserMap: Map<string, Parser>) => {
   return mapper;
 };
 
-const parserMap = initParserMap();
-const searchParsers = initSearchParser(parserMap);
-
 /** 默认 url 都是经过 supported site 判断的 */
 class NovelServices {
-  supportedSites = supportedSites;
+  supportedSites = ConfigCenter.supportedSites;
+  parserMap: Map<string, Parser>;
+  searchParsers: Parser[];
+  constructor() {
+    this.parserMap = new Map<string, Parser>();
+    ConfigCenter.configs.forEach((value, key) => {
+      this.parserMap.set(key, new Parser(value));
+    });
+    this.searchParsers = initSearchParser(this.parserMap);
+  }
 
   private getParser = (url: string) => {
-    const currentSite = supportedSites.find(i => url.includes(i));
-    return parserMap.get(currentSite);
+    const currentSite = this.supportedSites.find(i => url.includes(i));
+    return this.parserMap.get(currentSite);
   };
 
   async searchBook(keyword: string) {
-    const workArr = searchParsers.map(parser =>
+    const workArr = this.searchParsers.map(parser =>
       parser.search(keyword).catch(() => [] as ISearchItem[])
     );
 
@@ -48,7 +46,7 @@ class NovelServices {
       items.forEach(item => {
         const { bookName, bookUrl, author } = item;
         // 如果是当前不支持的书源就直接滤掉
-        if (!supportedSites.some(site => bookUrl.includes(site))) {
+        if (!this.supportedSites.some(site => bookUrl.includes(site))) {
           return;
         }
 

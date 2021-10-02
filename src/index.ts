@@ -2,6 +2,7 @@ import { PrickingApplication } from 'pricking-koa';
 import AV from 'leanengine';
 
 import serverTimerInitial from './cloud';
+import configCenter from './config-center';
 
 AV.init({
   appId: process.env.LEANCLOUD_APP_ID || 'T51iKKGXz2t9OriABcYSeRac-MdYXbMMI',
@@ -18,6 +19,15 @@ new PrickingApplication({
   port: Number(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3001),
   env: process.env.APP_ENV,
   mode: Number(process.env.APP_MODE),
+  loadedCallback: () => {
+    configCenter
+      .initial()
+      .then(() => {
+        serverTimerInitial();
+      })
+      .catch(e => {
+        console.trace(e);
+        process.exit(0);
+      });
+  },
 });
-
-serverTimerInitial();

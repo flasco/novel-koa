@@ -5,7 +5,7 @@ const baseAxios = axios.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
   }),
-  responseType: 'arraybuffer', //不对抓取的数据进行编码解析
+  responseType: 'arraybuffer', // 不对抓取的数据进行编码解析
   headers: {
     'User-Agent':
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36',
@@ -30,7 +30,8 @@ export async function postCrawl(url: string, payload: any, timeout = 5000) {
     });
     return result.data;
   } catch (error) {
-    throw new Error('postCrawl failed, ' + error.message);
+    console.trace(error.message);
+    throw new Error(`postCrawl failed, ${error.message}`);
   }
 }
 
@@ -41,6 +42,20 @@ export async function craw(url: string, timeout = 5000) {
     });
     return result.data;
   } catch (error) {
-    throw new Error('craw failed, ' + error.message);
+    console.trace(error.message);
+    throw new Error(`craw failed, ${error.message}`);
+  }
+}
+
+export async function normalCraw<T = any>(url: string, timeout = 5000) {
+  console.log(url);
+  try {
+    const result = await axios.get<T>(url, {
+      cancelToken: getSource(timeout),
+    });
+    return result.data;
+  } catch (error) {
+    console.trace(error.message);
+    throw error;
   }
 }
