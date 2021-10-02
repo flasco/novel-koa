@@ -2,7 +2,7 @@ import { AppMode, PrickingApplication } from 'pricking-koa';
 import AV from 'leanengine';
 
 AV.init({
-  appId: process.env.LEANCLOUD_APP_ID || 'T51iKKGXz2t9OriABcYSeRac-MdYXbMMI',
+  appId: process.env.LEANCLOUD_APP_ID ?? 'T51iKKGXz2t9OriABcYSeRac-MdYXbMMI',
   appKey: process.env.LEANCLOUD_APP_KEY || 'n57PqFRFsbwsSddDPO89Xpj5',
   masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || '9wfTPNEVmSjkzMICbztkEMc4',
 });

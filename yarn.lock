@@ -6831,6 +6831,11 @@ tslib@^2.0.3:
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-2.0.3.tgz?cache=0&sync_timestamp=1602286603545&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
   integrity sha1-jgdBrEX8DCJuWKF7/D5kubxsphw=
 
+tslib@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.nlark.com/tslib/download/tslib-2.3.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftslib%2Fdownload%2Ftslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
+  integrity sha1-6KM1rdXOrlGqJh0ypJAVjvBC7wE=
+
 tsscmp@1.0.6:
   version "1.0.6"
   resolved "https://registry.npm.taobao.org/tsscmp/download/tsscmp-1.0.6.tgz#85b99583ac3589ec4bfef825b5000aa911d605eb"
@@ -6909,10 +6914,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.npm.taobao.org/typescript/download/typescript-4.1.2.tgz?cache=0&sync_timestamp=1607411798030&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-4.1.2.tgz#6369ef22516fe5e10304aae5a5c4862db55380e9"
-  integrity sha1-Y2nvIlFv5eEDBKrlpcSGLbVTgOk=
+typescript@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.npmmirror.com/typescript/download/typescript-4.4.3.tgz?cache=0&sync_timestamp=1633159358925&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Ftypescript%2Fdownload%2Ftypescript-4.4.3.tgz#bdc5407caa2b109efd4f82fe130656f977a29324"
+  integrity sha1-vcVAfKorEJ79T4L+EwZW+XeikyQ=
 
 undefsafe@^2.0.3:
   version "2.0.3"
@@ -7340,10 +7345,10 @@ yocto-queue@^0.1.0:
   resolved "https://registry.npm.taobao.org/yocto-queue/download/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha1-ApTrPe4FAo0x7hpfosVWpqrxChs=
 
-zan-trashbin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npm.taobao.org/zan-trashbin/download/zan-trashbin-1.0.0.tgz#aa2e9a13ec6b564061b2258f94a5ba0dda849385"
-  integrity sha1-qi6aE+xrVkBhsiWPlKW6DdqEk4U=
+zan-trashbin@^1.0.1-beta.1:
+  version "1.0.1-beta.1"
+  resolved "https://registry.npmmirror.com/zan-trashbin/download/zan-trashbin-1.0.1-beta.1.tgz#eafa290ab53b020956a91e0c0e188013ef6d7d16"
+  integrity sha1-6vopCrU7AglWqR4MDhiAE+9tfRY=
   dependencies:
     chalk "^2.4.1"
     commander "^2.19.0"
