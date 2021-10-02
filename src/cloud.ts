@@ -19,7 +19,7 @@ schedule.scheduleJob(`0 0 ${TStart} * * *`, () => {
 let isRunning = false;
 
 async function start() {
-  console.log(webSite);
+  console.log('current site:', webSite);
   if (isRunning) {
     return console.log('已经在执行啦~');
   }
