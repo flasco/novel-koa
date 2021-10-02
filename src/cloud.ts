@@ -53,4 +53,4 @@ async function start() {
   isRunning = false;
 }
 
-module.exports = start;
+export = start;
