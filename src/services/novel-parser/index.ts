@@ -14,7 +14,9 @@ const initParserMap = () => {
 const initSearchParser = (parserMap: Map<string, Parser>) => {
   const mapper: Parser[] = [];
   parserMap.forEach(value => {
-    if (value.canSearch) mapper.push(value);
+    if (value.canSearch) {
+      mapper.push(value);
+    }
   });
 
   return mapper;
@@ -25,12 +27,14 @@ const searchParsers = initSearchParser(parserMap);
 
 /** 默认 url 都是经过 supported site 判断的 */
 class NovelServices {
+  supportedSites = supportedSites;
+
   private getParser = (url: string) => {
     const currentSite = supportedSites.find(i => url.includes(i));
     return parserMap.get(currentSite);
   };
 
-  public async searchBook(keyword: string) {
+  async searchBook(keyword: string) {
     const workArr = searchParsers.map(parser =>
       parser.search(keyword).catch(() => [] as ISearchItem[])
     );
@@ -42,18 +46,25 @@ class NovelServices {
 
     resultArr.forEach(items =>
       items.forEach(item => {
-        const uniqueKey = `${item.bookName}${item.author}`;
+        const { bookName, bookUrl, author } = item;
+        // 如果是当前不支持的书源就直接滤掉
+        if (!supportedSites.includes(bookUrl)) {
+          return;
+        }
+
+        const uniqueKey = `${bookName}${author}`;
         const position = nameMap.get(uniqueKey);
+
         if (position == null) {
           nameMap.set(uniqueKey, ptr);
           result[ptr++] = {
-            bookName: item.bookName,
-            author: item.author,
+            bookName,
+            author,
             plantformId: 0,
-            source: [item.bookUrl],
+            source: [bookUrl],
           };
         } else {
-          result[position].source.push(item.bookUrl);
+          result[position].source.push(bookUrl);
         }
       })
     );
@@ -62,24 +73,24 @@ class NovelServices {
   }
 
   /** 获取书籍目录 */
-  public async analyseList(url: string) {
+  async analyzeList(url: string) {
     return this.getParser(url).getChapterList(url);
   }
 
   /** 获取章节内容 */
-  public async analyseChapter(url: string) {
+  async analyzeChapter(url: string) {
     return this.getParser(url).getChapterDetail(url);
   }
 
   /** 获取最新章节 */
-  public async analyseLatestChapter(url: string) {
+  async analyzeLatestChapter(url: string) {
     return this.getParser(url).getLatestChapter(url);
   }
 
   /** 批量获取最新章节 */
-  public async analyseLatestChapters(list: ILatestChaptersReqListItem[]) {
+  async analyzeLatestChapters(list: ILatestChaptersReqListItem[]) {
     const resLst = await Promise.all(
-      list.map(i => this.analyseLatestChapter(i.url).catch(() => null))
+      list.map(i => this.analyzeLatestChapter(i.url).catch(() => null))
     );
 
     const workQueue = [];
@@ -89,7 +100,7 @@ class NovelServices {
       const listItem = list[index];
       if (item != null && item !== listItem.title) {
         const catalogUrl = listItem.fullUrl || listItem.url;
-        workQueue.push(this.analyseList(catalogUrl).catch(() => null));
+        workQueue.push(this.analyzeList(catalogUrl).catch(() => null));
         markList.push(index);
         return {
           title: item,
@@ -115,12 +126,12 @@ class NovelServices {
   }
 
   /** 获取书籍信息 */
-  public async getBookInfo(url: string) {
+  async getBookInfo(url: string) {
     return this.getParser(url).getBookDetail(url);
   }
 
   /** 批量获取书籍信息，包括最新章节 */
-  public async getBookInfos(sources: string[]) {
+  async getBookInfos(sources: string[]) {
     const stamp = Date.now();
     const workArr = sources.map((url, index) =>
       this.getBookInfo(url)
@@ -134,7 +145,21 @@ class NovelServices {
 
     const results = await Promise.all(workArr);
 
-    return results.filter(i => !!i).sort((a, b) => a.stamp - b.stamp);
+    return results.filter(i => Boolean(i)).sort((a, b) => a.stamp - b.stamp);
+  }
+
+  /** 获取书源信息 */
+  async getOrigin(catalogUrls: string[]) {
+    const workQueue = catalogUrls.map(item => this.getBookInfo(item).catch(() => null));
+    const resLst = await Promise.all(workQueue);
+    const result = resLst
+      .filter(i => Boolean(i))
+      .map((i, ind) => ({
+        catalogUrl: i.catalogUrl,
+        url: catalogUrls[ind],
+        latestChapter: i.latest || '获取失败',
+      }));
+    return result;
   }
 }
 

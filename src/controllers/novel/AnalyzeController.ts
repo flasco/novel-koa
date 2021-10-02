@@ -1,11 +1,11 @@
 import { Controller, Description, Get, Post } from 'pricking-koa';
 
 import BaseController from '@app/controllers/base/IndexController';
-import NovelServices from '@app/services/novel-parser';
+import NovelService from '@app/services/novel-parser';
 
-@Controller('/v3/analysis')
-class AnalyseController extends BaseController {
-  novelServices = new NovelServices();
+@Controller('/v3/analyze')
+class AnalyzeController extends BaseController {
+  novelService = new NovelService();
 
   @Get('/chapter')
   @Description('解析章节')
@@ -14,7 +14,7 @@ class AnalyseController extends BaseController {
       query: { url },
     } = this.ctx;
     this.validator.required(url).supportedUrl(url);
-    const result = await this.novelServices.analyseChapter(url);
+    const result = await this.novelService.analyzeChapter(url);
 
     this.ctx.success(result);
   }
@@ -26,7 +26,7 @@ class AnalyseController extends BaseController {
       query: { url },
     } = this.ctx;
     this.validator.required(url).supportedUrl(url);
-    const result = await this.novelServices.analyseList(url);
+    const result = await this.novelService.analyzeList(url);
 
     this.ctx.success(result);
   }
@@ -37,8 +37,9 @@ class AnalyseController extends BaseController {
     const {
       query: { url },
     } = this.ctx;
+    /** 通常最新章节的 url 与书籍目录 url 相同，当然也有不同的 */
     this.validator.required(url).supportedUrl(url);
-    const result = await this.novelServices.analyseLatestChapter(url);
+    const result = await this.novelService.analyzeLatestChapter(url);
 
     this.ctx.success(result);
   }
@@ -47,11 +48,24 @@ class AnalyseController extends BaseController {
   @Description('批量获取最新章节')
   async getLatestChapters() {
     const { body: list } = this.ctx.request;
-    this.validator.isNumber(list.length, '不符合规则的参数');
-    const result = await this.novelServices.analyseLatestChapters(list);
+
+    this.validator
+      .isNumber(list.length, '不符合规则的参数')
+      .required(list[0].url, '不符合规则的参数 - url');
+    const result = await this.novelService.analyzeLatestChapters(list);
+
+    this.ctx.success(result);
+  }
+
+  @Post('/origin')
+  @Description('获取书源最新章节')
+  async getOrigin() {
+    const { body: list } = this.ctx.request;
+
+    const result = await this.novelService.getOrigin(list);
 
     this.ctx.success(result);
   }
 }
 
-export = AnalyseController;
+export = AnalyzeController;

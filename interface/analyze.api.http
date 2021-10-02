@@ -1,0 +1,25 @@
+@apiDomain = localhost:3001
+###
+
+GET http://{{apiDomain}}/v3/analyze/api/catalog
+  ?url=https://www.19zw.com/78_78334/
+
+###
+GET http://{{apiDomain}}/v3/analyze/api/chapter
+  ?url=https://www.19zw.com/78_78334/43393506.html
+
+###
+GET http://{{apiDomain}}/v3/analyze/api/latest-chapter
+  ?url=https://www.19zw.com/78_78334/
+
+###
+POST http://{{apiDomain}}/v3/analyze/api/batch-latest-chapters
+Content-Type: application/json
+
+[{ "url": "https://www.19zw.com/78_78334/" }]
+
+###
+POST http://{{apiDomain}}/v3/analyze/api/origin
+Content-Type: application/json
+
+["https://www.19zw.com/78_78334/"]
