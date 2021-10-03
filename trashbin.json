@@ -4,7 +4,6 @@
 	"include": [
 		"dist/*",
 		"yarn.lock",
-		"package.json",
 		"README.md"
 	],
 	"commit": [
@@ -13,6 +12,5 @@
 		"\tbuild:    {#BUILDER#}\n",
 		"\tbranch:   {#BRANCH#}\n",
 		"\tmessage:  {#COMMIT_MSG#}\n"
-	],
-	"removeDevDeps": true
+	]
 }
