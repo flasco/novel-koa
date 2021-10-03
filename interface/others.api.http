@@ -1,7 +1,7 @@
 @apiDomain = localhost:3001
 ###
 
-GET http://{{apiDomain}}/v3/others/apidoc
+GET http://{{apiDomain}}/v3/others/api-doc
 
 ###
 GET http://{{apiDomain}}/v3/others/api/site-map

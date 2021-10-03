@@ -1,15 +1,15 @@
 @apiDomain = localhost:3001
-###
+### book-info
 
 GET http://{{apiDomain}}/v3/books/api/info
-  ?url=https://www.19zw.com/78_78334/
+  ?url=http://www.81ht.com/book/92542.html
 
-###
+### book-infos
 POST http://{{apiDomain}}/v3/books/api/infos
 Content-Type: application/json
 
-["https://www.19zw.com/78_78334/"]
+["http://www.81ht.com/book/92542.html"]
 
-###
+### search
 GET http://{{apiDomain}}/v3/books/api/search
-  ?keyword=我欲封天
+  ?keyword=彼岸

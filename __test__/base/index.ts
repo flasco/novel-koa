@@ -1,4 +1,4 @@
-import { AppMode, PrickingApplication } from 'pricking-koa';
+import { AppMode, PrickingApplication } from '@pricking/core';
 import supertest from 'supertest';
 import path from 'path';
 

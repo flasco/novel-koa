@@ -97,7 +97,7 @@ class NovelServices {
     const result = resLst.map((item, index) => {
       const listItem = list[index];
       if (item != null && item !== listItem.title) {
-        const catalogUrl = listItem.fullUrl || listItem.url;
+        const catalogUrl = listItem.catalogUrl || listItem.url;
         workQueue.push(this.analyzeList(catalogUrl).catch(() => null));
         markList.push(index);
         return {
