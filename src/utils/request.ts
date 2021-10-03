@@ -1,5 +1,6 @@
 import axios from 'axios';
 import https from 'https';
+import { delay } from '.';
 
 const baseAxios = axios.create({
   httpsAgent: new https.Agent({
@@ -48,13 +49,16 @@ export async function craw(url: string, timeout = 5000) {
 }
 
 export async function normalCraw<T = any>(url: string, timeout = 5000) {
-  try {
-    const result = await axios.get<T>(url, {
-      cancelToken: getSource(timeout),
-    });
-    return result.data;
-  } catch (error) {
-    console.trace(error.message, url);
-    throw error;
+  for (let i = 0; i <= 3; i++) {
+    try {
+      const { data } = await axios.get<T>(url, {
+        cancelToken: getSource(timeout),
+      });
+      return data;
+    } catch (error) {
+      await delay(2000);
+      console.log(`请求失败，第${i + 1}次重试...`);
+    }
   }
+  throw new Error('请求失败');
 }
