@@ -1,5 +1,5 @@
 import ConfigCenter from '@app/config-center';
-import Validator from 'pricking-koa/dist/lib/validator';
+import Validator from '@pricking/core/dist/lib/validator';
 
 class BaseValidator extends Validator {
   supportedUrl(url: string, msg = '暂不支持的网站') {

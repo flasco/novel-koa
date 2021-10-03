@@ -1,6 +1,6 @@
-import { $, fs } from 'zx';
+const { $, fs } = require('zx');
 
-void (async function () {
+(async function () {
   await fs.remove('dist');
   await $`yarn tsc -p tsconfig.build.json`;
   await $`yarn tscpaths -p tsconfig.build.json -s ./src -o ./dist`;

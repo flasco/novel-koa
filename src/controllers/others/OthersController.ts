@@ -1,4 +1,4 @@
-import { Controller, Description, Get, Index } from 'pricking-koa';
+import { Controller, Description, Get, Index } from '@pricking/core';
 
 import BaseController from '@app/controllers/base/IndexController';
 import { craw } from '@app/utils/request';

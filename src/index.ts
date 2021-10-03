@@ -1,4 +1,4 @@
-import { PrickingApplication } from 'pricking-koa';
+import { PrickingApplication } from '@pricking/core';
 import AV from 'leanengine';
 
 import serverTimerInitial from './cloud';
