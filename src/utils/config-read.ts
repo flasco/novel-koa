@@ -28,7 +28,6 @@ const getConfigContent = async () => {
 
 export const getRemoteConfigs = async () => {
   if (process.env.APP_ENV === 'development') {
-    console.log('local debug!');
     return [
       JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../config/19zw.json'), 'utf-8')),
     ];
