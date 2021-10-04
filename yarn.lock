@@ -758,21 +758,22 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@pricking/cli@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.npmmirror.com/@pricking/cli/download/@pricking/cli-0.0.2.tgz#7e8f80829080c1b9e1f75cc3d00600bf8d7a829c"
-  integrity sha1-fo+AgpCAwbnh91zD0AYAv416gpw=
+"@pricking/cli@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.npmmirror.com/@pricking/cli/download/@pricking/cli-0.0.3.tgz#0dc981c9e26a6e7a05881b2e4e674b75d1340b79"
+  integrity sha1-DcmByeJqbnoFiBsuTmdLddE0C3k=
   dependencies:
     chalk "^4.1.2"
     nodemon "^2.0.13"
     ts-node "^10.2.1"
+    tsconfig-paths "^3.11.0"
     yargs "^17.2.1"
     zx "^4.2.0"
 
-"@pricking/core@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.npmmirror.com/@pricking/core/download/@pricking/core-0.0.2.tgz#aa03ac14676bd458abf9107f326e1a4007005768"
-  integrity sha1-qgOsFGdr1Fir+RB/Mm4aQAcAV2g=
+"@pricking/core@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.npmmirror.com/@pricking/core/download/@pricking/core-0.0.3.tgz#be9fca5e48d0669be8436ff5724d572962e241a7"
+  integrity sha1-vp/KXkjQZpvoQ2/1ck1XKWLiQac=
   dependencies:
     "@koa/router" "^10.0.0"
     "@types/koa" "^2.11.6"
@@ -7082,10 +7083,10 @@ ts-node@^10.2.1:
     make-error "^1.1.1"
     yn "3.1.1"
 
-tsconfig-paths@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.npm.taobao.org/tsconfig-paths/download/tsconfig-paths-3.9.0.tgz#098547a6c4448807e8fcb8eae081064ee9a3c90b"
-  integrity sha1-CYVHpsREiAfo/Ljq4IEGTumjyQs=
+tsconfig-paths@^3.11.0:
+  version "3.11.0"
+  resolved "https://registry.nlark.com/tsconfig-paths/download/tsconfig-paths-3.11.0.tgz?cache=0&sync_timestamp=1629839928744&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftsconfig-paths%2Fdownload%2Ftsconfig-paths-3.11.0.tgz#954c1fe973da6339c78e06b03ce2e48810b65f36"
+  integrity sha1-lUwf6XPaYznHjgawPOLkiBC2XzY=
   dependencies:
     "@types/json5" "^0.0.29"
     json5 "^1.0.1"

@@ -3,9 +3,6 @@
   "ext": "ts",
   "ignore": ["src/**/*.spec.ts"],
   "entryPoint": "./src/index.ts",
-  "execArgs": [
-    ["-r", "tsconfig-paths/register"]
-  ],
   "env": {
     "APP_ENV": "development",
     "APP_MODE": 1
