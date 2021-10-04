@@ -1,4 +1,4 @@
-import BaseController from 'pricking-koa/dist/controllers/BaseController';
+import BaseController from '@pricking/core/dist/controllers/BaseController';
 import BaseValidator from './validators';
 
 class IndexController extends BaseController {

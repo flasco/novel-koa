@@ -1,7 +1,9 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/*", "scripts/*"],
+  "include": ["src/**/*"],
   "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2020",
     "declaration": false,
     "sourceMap": false,
     "removeComments": true,

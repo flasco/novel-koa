@@ -1,5 +1,8 @@
-import { AppMode, PrickingApplication } from 'pricking-koa';
+import { PrickingApplication } from '@pricking/core';
 import AV from 'leanengine';
+
+import serverTimerInitial from './cloud';
+import configCenter from './config-center';
 
 AV.init({
   appId: process.env.LEANCLOUD_APP_ID || 'T51iKKGXz2t9OriABcYSeRac-MdYXbMMI',
@@ -7,15 +10,24 @@ AV.init({
   masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || '9wfTPNEVmSjkzMICbztkEMc4',
 });
 
-if (process.env.LEANCLOUD_APP_ID) {
-  if (!process.env.SELF_WEBSITE) throw new Error('self_website is undefined');
+if (process.env.LEANCLOUD_APP_ID && !process.env.SELF_WEBSITE) {
+  throw new Error('self_website is undefined');
 }
-
-const PORT = +(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3001);
 
 new PrickingApplication({
   rootPath: __dirname,
-  port: PORT,
-  env: 'development',
-  mode: AppMode.Debug,
+  port: Number(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3001),
+  env: process.env.APP_ENV,
+  mode: Number(process.env.APP_MODE),
+  loadedCallback: () => {
+    configCenter
+      .initial()
+      .then(() => {
+        serverTimerInitial();
+      })
+      .catch(e => {
+        console.trace(e);
+        process.exit(0);
+      });
+  },
 });

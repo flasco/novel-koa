@@ -1,10 +1,10 @@
-import { Controller, Description, Get, Post } from 'pricking-koa';
+import { Controller, Description, Get, Post } from '@pricking/core';
 
 import BaseController from '@app/controllers/base/IndexController';
 import NovelServices from '@app/services/novel-parser';
 
 @Controller('/v3/books')
-class AnalyseController extends BaseController {
+class BookController extends BaseController {
   novelServices = new NovelServices();
 
   @Get('/info')
@@ -38,4 +38,4 @@ class AnalyseController extends BaseController {
   }
 }
 
-export = AnalyseController;
+export = BookController;

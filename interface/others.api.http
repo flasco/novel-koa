@@ -1,0 +1,11 @@
+@apiDomain = localhost:3001
+###
+
+GET http://{{apiDomain}}/v3/others/api-doc
+
+###
+GET http://{{apiDomain}}/v3/others/api/site-map
+
+###
+GET http://{{apiDomain}}/v3/others/api/get-image
+  ?img=https%3A%2F%2Fwww.19zw.com%2Ffiles%2Farticle%2Fimage%2F78%2F78324%2F78324s.jpg

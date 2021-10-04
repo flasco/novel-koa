@@ -1,0 +1,10 @@
+{
+  "watch": ["src"],
+  "ext": "ts",
+  "ignore": ["src/**/*.spec.ts"],
+  "entryPoint": "./src/index.ts",
+  "env": {
+    "APP_ENV": "development",
+    "APP_MODE": 1
+  }
+}

@@ -1,0 +1,26 @@
+@apiDomain = localhost:3001
+
+### catalog
+
+GET http://{{apiDomain}}/v3/analyze/api/catalog
+  ?url=http://www.81ht.com/read/92542.html
+
+### chapter
+GET http://{{apiDomain}}/v3/analyze/api/chapter
+  ?url=http://www.81ht.com/read/92542/188770976.html
+
+### latest-chapter
+GET http://{{apiDomain}}/v3/analyze/api/latest-chapter
+  ?url=http://www.81ht.com/read/92542.html
+
+### latest-chapters
+POST http://{{apiDomain}}/v3/analyze/api/batch-latest-chapters
+Content-Type: application/json
+
+[{ "url": "http://www.81ht.com/book/92542.html", "catalogUrl": "http://www.81ht.com/read/92542.html" }]
+
+### book-origin
+POST http://{{apiDomain}}/v3/analyze/api/origin
+Content-Type: application/json
+
+["http://www.81ht.com/book/92542.html"]

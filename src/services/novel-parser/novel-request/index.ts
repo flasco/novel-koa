@@ -2,7 +2,7 @@ import { queue, QueueObject } from 'async';
 import LRUCache from 'lru-cache';
 
 import { delay } from '@app/utils';
-import { configMap, supportedSites } from '@app/constants';
+import ConfigCenter from '@app/config-center';
 import { craw, postCrawl } from '@app/utils/request';
 
 /**
@@ -13,7 +13,7 @@ import { craw, postCrawl } from '@app/utils/request';
 const MAX_POOL_SIZE = 10000;
 const MAX_POOL_AGE = 20 * 60 * 1000; // 缓存 20 min
 
-const MAX_TASK_SIZE = Math.floor((MAX_POOL_SIZE / configMap.size) * 0.67);
+const MAX_TASK_SIZE = Math.floor((MAX_POOL_SIZE / ConfigCenter.configs.size) * 0.67);
 
 interface IPayload {
   url: string;
@@ -30,18 +30,18 @@ class NoverRequestCore {
   });
 
   constructor() {
-    this.init();
+    ConfigCenter.addConfigListener(this.init);
   }
 
-  private init() {
-    configMap.forEach((config, key) => {
+  init = () => {
+    ConfigCenter.configs.forEach((config, key) => {
       this.workingList[key] = new Set<string>();
       this.wrokers[key] = queue((payload: IPayload, callback) => {
         const { url } = payload;
         const uniqueKey = this.getUniqueKey(payload);
 
         this.workingList[key].add(url);
-        this.analyseContent(payload)
+        this.analyzeContent(payload)
           .then(val => this.resultPool.set(uniqueKey, val))
           .catch(() => undefined)
           .finally(() => {
@@ -50,11 +50,13 @@ class NoverRequestCore {
           });
       }, config?.concurrency ?? 6);
     });
-  }
+  };
 
-  private async analyseContent(payload: IPayload) {
+  private async analyzeContent(payload: IPayload) {
     const { url, data, timeout = 5000, method } = payload;
-    if (method === 'get') return craw(url, timeout);
+    if (method === 'get') {
+      return craw(url, timeout);
+    }
     return postCrawl(url, data, timeout);
   }
 
@@ -66,8 +68,10 @@ class NoverRequestCore {
 
   private getCurrentSite(payload: IPayload) {
     const { url } = payload;
-    const currentSite = supportedSites.find(i => url.includes(i));
-    if (!currentSite) throw new Error('task create failed, unsupported site');
+    const currentSite = ConfigCenter.supportedSites.find(i => url.includes(i));
+    if (!currentSite) {
+      throw new Error('task create failed, unsupported site');
+    }
     return currentSite;
   }
 
@@ -75,8 +79,12 @@ class NoverRequestCore {
     const uniqueKey = this.getUniqueKey(payload);
     const currentSite = this.getCurrentSite(payload);
 
-    if (this.workingList[currentSite].has(uniqueKey)) return true;
-    if (useCache && this.resultPool.has(uniqueKey)) return true;
+    if (this.workingList[currentSite].has(uniqueKey)) {
+      return true;
+    }
+    if (useCache && this.resultPool.has(uniqueKey)) {
+      return true;
+    }
     if (this.wrokers[currentSite].length() > MAX_TASK_SIZE) {
       throw new Error('task create failed, over limit');
     }
@@ -89,7 +97,9 @@ class NoverRequestCore {
     const fetchCnt = Math.round((payload.timeout ?? 5000) / 500);
     for (let i = 0; i < fetchCnt; i++) {
       const result = this.resultPool.get(this.getUniqueKey(payload));
-      if (result) return result;
+      if (result) {
+        return result;
+      }
       await delay(500);
     }
 
