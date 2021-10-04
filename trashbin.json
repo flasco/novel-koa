@@ -7,7 +7,7 @@
 		"README.md"
 	],
 	"commit": [
-		"\t{#PACKAGE#} 构建\n",
+		"\t[{#TIME#}] {#PACKAGE#} 构建\n",
 		"\ttime:     {#TIME#}\n",
 		"\tbuild:    {#BUILDER#}\n",
 		"\tbranch:   {#BRANCH#}\n",
