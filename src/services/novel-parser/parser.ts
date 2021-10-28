@@ -5,8 +5,8 @@ import urlencode from 'urlencode';
 import nrc from './novel-request';
 
 import { htmlAnalysis } from '@app/utils/quert';
-import { ISiteConfig } from '@app/definitions/config';
-import { ISearchItem } from '@app/definitions/novel';
+import type { ISiteConfig } from '@app/definitions/config';
+import type { ISearchItem } from '@app/definitions/novel';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

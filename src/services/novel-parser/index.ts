@@ -1,5 +1,9 @@
 import ConfigCenter from '@app/config-center';
-import { ILatestChaptersReqListItem, ISearchItem, ISearchRetItem } from '@app/definitions/novel';
+import type {
+  ILatestChaptersReqListItem,
+  ISearchItem,
+  ISearchRetItem,
+} from '@app/definitions/novel';
 
 import Parser from './parser';
 

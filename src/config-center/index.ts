@@ -1,4 +1,4 @@
-import { ISiteConfig } from '@app/definitions/config';
+import type { ISiteConfig } from '@app/definitions/config';
 import { getRemoteConfigs } from '@app/utils/config-read';
 
 class ConfigCenter {
