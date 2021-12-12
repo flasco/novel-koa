@@ -8,9 +8,9 @@ GET http://{{apiDomain}}/v3/books/api/info
 POST http://{{apiDomain}}/v3/books/api/infos
 Content-Type: application/json
 
-["http://www.81ht.com/book/92542.html"]
+["https://www.biqooge.com/3_3590/"]
 
 ### search
 GET http://{{apiDomain}}/v3/books/api/search
-  ?keyword=熊狼狗
+  ?keyword=明日
 

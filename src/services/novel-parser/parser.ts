@@ -128,6 +128,8 @@ class BaseParser {
       res = await this.getPageContent(searchUrl);
     }
 
+    // TODO: 可以考虑兼容一下特定搜索词直接进入指定书籍页面，没走列表的场景（看看目标的url是否符合书籍规则）
+
     const searchList: ISearchItem[] = [];
     const list = htmlAnalysis(res, search.bookList);
     for (let i = 0; i < list.length; i++) {

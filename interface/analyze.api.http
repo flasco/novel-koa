@@ -3,15 +3,15 @@
 ### catalog
 
 GET http://{{apiDomain}}/v3/analyze/api/catalog
-  ?url=http://www.81ht.com/read/92542.html
+  ?url=https://www.biqooge.com/3_3590/
 
 ### chapter
 GET http://{{apiDomain}}/v3/analyze/api/chapter
-  ?url=http://www.81ht.com/read/92542/188770976.html
+  ?url=https://www.biqooge.com/3_3590/2474321.html
 
 ### latest-chapter
 GET http://{{apiDomain}}/v3/analyze/api/latest-chapter
-  ?url=http://www.81ht.com/read/92542.html
+  ?url=https://www.biqooge.com/3_3590/
 
 ### latest-chapters
 POST http://{{apiDomain}}/v3/analyze/api/batch-latest-chapters
