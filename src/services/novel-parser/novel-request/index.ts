@@ -61,8 +61,14 @@ class NoverRequestCore {
   }
 
   private getUniqueKey(payload: IPayload) {
-    const { url, method } = payload;
-    const uniqueKey = `${method}-${url}`;
+    const { url, method, data = {} } = payload;
+    const dataStr =
+      typeof data === 'string'
+        ? data
+        : Object.keys(data)
+            .map(k => `${k}:${k[data]}`)
+            .join('');
+    const uniqueKey = `${method}-${url}_${dataStr}`;
     return uniqueKey;
   }
 

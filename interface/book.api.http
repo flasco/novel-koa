@@ -12,4 +12,5 @@ Content-Type: application/json
 
 ### search
 GET http://{{apiDomain}}/v3/books/api/search
-  ?keyword=彼岸
+  ?keyword=熊狼狗
+

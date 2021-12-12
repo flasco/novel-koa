@@ -4,9 +4,4 @@ builder
 coverage
 dist
 
-# trash ignore
-config/version_css.json
-config/version_js.json
-config/version_h5_js.json
-config/version_h5_css.json
-
+config
