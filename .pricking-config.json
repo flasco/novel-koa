@@ -1,10 +1,11 @@
 {
+  "entryPoint": "./src/index.ts",
   "watch": ["src"],
   "ext": "ts,ejs",
   "ignore": ["src/**/*.spec.ts"],
-  "entryPoint": "./src/index.ts",
   "env": {
     "APP_ENV": "development",
     "APP_MODE": 1
-  }
+  },
+  "delay": 500
 }

@@ -18,7 +18,7 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@pricking/cli": "^0.0.5",
+    "@pricking/cli": "^0.0.7",
     "@swc/cli": "^0.1.51",
     "@swc/core": "^1.2.103",
     "@types/async": "^3.2.5",
@@ -44,7 +44,7 @@
     "zx": "^4.2.0"
   },
   "dependencies": {
-    "@pricking/core": "^0.0.5",
+    "@pricking/core": "^0.0.7",
     "async": "^3.2.0",
     "axios": "^0.22.0",
     "cheerio": "^1.0.0-rc.10",
