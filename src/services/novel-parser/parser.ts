@@ -1,5 +1,4 @@
 import iconv from 'iconv-lite';
-import URL from 'url';
 import urlencode from 'urlencode';
 
 import nrc from './novel-request';
@@ -17,7 +16,9 @@ class BaseParser {
 
   constructor(config: ISiteConfig) {
     this.config = config;
-    if (!this.config) throw Error('unsupported site');
+    if (!this.config) {
+      throw Error('unsupported site');
+    }
   }
 
   async getPageContent(url: string, { useCache = true } = {}) {
@@ -59,13 +60,16 @@ class BaseParser {
       const item = chapters[i];
       const title = htmlAnalysis(item, list.title) as string;
       const href = htmlAnalysis(item, list.href) as string;
-      if (title.length < 1 || href == null) continue;
-      if (!hrefSet.has(href)) {
+      if (title.length < 1 || href == null) {
+        continue;
+      }
+      const curHref = new URL(href, url).toString().replace(/(.*)(\/.*\/){2}(.*)/, '$1$2$3');
+      if (!hrefSet.has(curHref)) {
         novelList.push({
           title,
-          url: URL.resolve(url, href).replace(/(.*)(\/.*\/){2}(.*)/, '$1$2$3'),
+          url: curHref,
         });
-        hrefSet.add(href);
+        hrefSet.add(curHref);
       }
     }
 
@@ -98,7 +102,9 @@ class BaseParser {
       .replace(/\n+/g, '\n')
       .replace(/\t+/g, '');
 
-    if (text.trim().length < 5) throw new Error('章节异常');
+    if (text.trim().length < 5) {
+      throw new Error('章节异常');
+    }
 
     const ret = {
       title: htmlAnalysis(base, chapter.title),
@@ -137,10 +143,12 @@ class BaseParser {
       const name = htmlAnalysis(item, search.bookName) as string;
       const author = htmlAnalysis(item, search.author) as string;
       const href = htmlAnalysis(item, search.bookUrl) as string;
-      if (href == null || name.length < 1) continue;
+      if (href == null || name.length < 1) {
+        continue;
+      }
       const payload = {
         bookName: name,
-        bookUrl: URL.resolve(searchUrl, href),
+        bookUrl: new URL(href, searchUrl).toString(),
         author,
         latestChapter: undefined,
       };
@@ -164,13 +172,16 @@ class BaseParser {
       desc: (htmlAnalysis(base, description) as string).trim(),
       name: htmlAnalysis(base, name),
       author: htmlAnalysis(base, author),
-      image: URL.resolve(this.config.site, htmlAnalysis(base, imageUrl) as string),
+      image: new URL(htmlAnalysis(base, imageUrl) as string, this.config.site).toString(),
       url,
       catalogUrl: url,
     };
 
     if (catalogUrl != null && catalogUrl !== '') {
-      payload.catalogUrl = URL.resolve(this.config.site, htmlAnalysis(base, catalogUrl) as string);
+      payload.catalogUrl = new URL(
+        htmlAnalysis(base, catalogUrl) as string,
+        this.config.site
+      ).toString();
     }
 
     return payload;
