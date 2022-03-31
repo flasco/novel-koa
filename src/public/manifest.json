@@ -1,0 +1,9 @@
+{
+  "name": "Book Story",
+  "short_name": "book-story",
+  "start_url": ".",
+  "theme_color": "#f9f9f9",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "display": "standalone"
+}

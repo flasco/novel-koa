@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0,viewport-fit=cover,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="0" />
+
+    <!-- 设置Safari全屏，在iOS7+无效 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Book Story" />
+
+    <!-- 改变Safari状态栏样式，可选default/black/black-translucent，需在上述全屏模式下才有效 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-orientation" content="portrait" />
+    <!-- 保存网站到桌面时添加图标 -->
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="//cdn.nlark.com/yuque/0/2021/png/753805/1612434694637-9cdb699e-f355-4923-baa8-b9496f3bc1f8.png"
+    />
+    <link rel="apple-touch-icon" href="./favicon.ico" />
+
+    <meta name="referrer" content="never" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" type="image/x-icon" class="js-site-favicon" href="./favicon.ico" />
+    <link rel="manifest" href="//unpkg.com/@leavo/book-story/dist/manifest.json" />
+    <title>Book Story</title>
+    <script type="module" crossorigin src="//unpkg.com/@leavo/book-story/dist/assets/index.js"></script>
+    <link rel="stylesheet" href="//unpkg.com/@leavo/book-story/dist/assets/index.css">
+  </head>
+  <body>
+    <div id="root">loading script...</div>
+    <noscript>plz allow script run</noscript>
+    <script>
+      // 注册service work
+      if (navigator.serviceWorker) {
+        // scope要对
+        navigator.serviceWorker.register('./sw.js').then(registration => {
+          console.log('action:', registration.scope);
+          // return pushMessageAction();
+        });
+      }
+    </script>
+  </body>
+</html>
