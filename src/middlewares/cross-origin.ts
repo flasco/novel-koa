@@ -1,4 +1,4 @@
-const allowedSite = process.env.APP_ENV === 'development' ? '*' : 'https://flasco.gitee.io';
+const allowedSite = process.env.APP_ENV === 'development' ? '*' : 'https://*.avosapps.us';
 
 export = () => async (ctx, next) => {
   ctx.set('Access-Control-Allow-Credentials', true);
