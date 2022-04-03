@@ -78,6 +78,7 @@ self.addEventListener('fetch', e => {
 
         const fetchAndUpdate = () =>
           fetch(e.request)
+            .then(res => res.redirected ? fetch(res.url) : res)
             .then(res => {
               if (canCache(res.status, e.request.method.toLowerCase())) {
                 cache.put(requestKey, res.clone());
