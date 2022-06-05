@@ -109,7 +109,16 @@ class BaseParser {
     const ret = {
       title: htmlAnalysis(base, chapter.title),
       content: text,
+      prevUrl: '',
+      nextUrl: '',
     };
+
+    if (chapter.nextUrl) {
+      const asPrevHref = htmlAnalysis(base, chapter.prevUrl) as string;
+      const asNextHref = htmlAnalysis(base, chapter.nextUrl) as string;
+      ret.prevUrl = asPrevHref ? new URL(asPrevHref, url).toString() : '';
+      ret.nextUrl = asNextHref ? new URL(asNextHref, url).toString() : '';
+    }
 
     return ret;
   }
