@@ -20,6 +20,7 @@ interface IPayload {
   data?: any;
   method?: 'get' | 'post';
   timeout?: number;
+  headers: any;
 }
 class NoverRequestCore {
   private wrokers: Record<string, QueueObject<IPayload>> = {};
@@ -53,11 +54,11 @@ class NoverRequestCore {
   };
 
   private async analyzeContent(payload: IPayload) {
-    const { url, data, timeout = 5000, method } = payload;
+    const { url, data, timeout = 5000, method, headers } = payload;
     if (method === 'get') {
-      return craw(url, timeout);
+      return craw(url, { timeout, headers });
     }
-    return postCrawl(url, data, timeout);
+    return postCrawl(url, data, { timeout, headers });
   }
 
   private getUniqueKey(payload: IPayload) {

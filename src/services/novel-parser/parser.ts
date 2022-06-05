@@ -21,23 +21,33 @@ class BaseParser {
     }
   }
 
-  async getPageContent(url: string, { useCache = true } = {}) {
+  async getPageContent(url: string, { useCache = true, headers = {}, timeout = 5000 } = {}) {
     const res = await nrc.push(
       {
         url,
         method: 'get',
-        timeout: 5000,
+        timeout,
+        headers,
       },
       useCache
     );
     return iconv.decode(res, this.config.charset);
   }
 
-  async getPostContent(url: string, timeout = 5000) {
+  async getPostContent({
+    url,
+    timeout = 5000,
+    headers,
+  }: {
+    url: string;
+    timeout?: number;
+    headers?: any;
+  }) {
     const [newUrl, qstring] = url.split('?');
     const res = await nrc.push(
       {
         method: 'post',
+        headers,
         url: newUrl,
         data: qstring,
         timeout,
@@ -109,7 +119,16 @@ class BaseParser {
     const ret = {
       title: htmlAnalysis(base, chapter.title),
       content: text,
+      prevUrl: '',
+      nextUrl: '',
     };
+
+    if (chapter.nextUrl) {
+      const asPrevHref = htmlAnalysis(base, chapter.prevUrl) as string;
+      const asNextHref = htmlAnalysis(base, chapter.nextUrl) as string;
+      ret.prevUrl = asPrevHref ? new URL(asPrevHref, url).toString() : '';
+      ret.nextUrl = asNextHref ? new URL(asNextHref, url).toString() : '';
+    }
 
     return ret;
   }
@@ -120,7 +139,9 @@ class BaseParser {
 
   async search(keyword: string) {
     const { search, charset } = this.config;
-    const { pattern, method, closeEncode } = search;
+    const { pattern, method, closeEncode, customHeader } = search;
+
+    const preHeader = customHeader ? JSON.parse(customHeader) : {};
 
     const searchUrl = pattern.replace(
       '${key}',
@@ -129,7 +150,7 @@ class BaseParser {
 
     let res;
     if (method === 'post') {
-      res = await this.getPostContent(searchUrl, 8000);
+      res = await this.getPostContent({ url: searchUrl, headers: preHeader });
     } else {
       res = await this.getPageContent(searchUrl);
     }

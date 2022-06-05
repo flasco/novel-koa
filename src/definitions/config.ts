@@ -5,6 +5,7 @@ export interface ISiteConfig {
   search: {
     method: string;
     pattern: string;
+    customHeader?: string;
     closeEncode?: string;
     bookList: string;
     bookName: string;
@@ -28,5 +29,7 @@ export interface ISiteConfig {
   chapter: {
     title: string;
     content: string;
+    nextUrl?: string;
+    prevUrl?: string;
   };
 }
