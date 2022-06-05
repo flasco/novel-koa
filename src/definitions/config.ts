@@ -28,5 +28,7 @@ export interface ISiteConfig {
   chapter: {
     title: string;
     content: string;
+    next?: string;
+    prev?: string;
   };
 }
