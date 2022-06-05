@@ -48,7 +48,7 @@
     "async": "^3.2.0",
     "axios": "^0.22.0",
     "cheerio": "^1.0.0-rc.10",
-    "html-tag-names": "^2.0.1",
+    "html-tag-names": "1.x",
     "iconv-lite": "^0.6.2",
     "koa-compose": "^4.1.0",
     "koa-ejs": "^4.3.0",
