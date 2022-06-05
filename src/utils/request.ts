@@ -13,6 +13,7 @@ const baseAxios = axios.create({
     Connection: 'keep-alive',
     'content-type': 'application/x-www-form-urlencoded',
     Referer: 'https://www.baidu.com',
+    cookie: '__asd=1234',
   },
 });
 

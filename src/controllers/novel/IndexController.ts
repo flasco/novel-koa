@@ -13,6 +13,12 @@ class AnalyzeController extends BaseController {
       supportedSites: configCenter.supportedSites,
     });
   }
+
+  @Index(['/book-story'])
+  @Description('entry')
+  async getEntryHTML() {
+    await this.ctx.render('entry');
+  }
 }
 
 export = AnalyzeController;
