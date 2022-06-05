@@ -3830,11 +3830,6 @@ html-escaper@^2.0.0:
   resolved "https://registry.npm.taobao.org/html-escaper/download/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha1-39YAJ9o2o238viNiYsAKWCJoFFM=
 
-html-tag-names@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmmirror.com/html-tag-names/-/html-tag-names-2.0.1.tgz#5626263e7d7b15789fa35a9f816234156901adc6"
-  integrity sha512-PX8KyLG7dwsjis3NPj1u+/EJf2CgH2d+qzekQpnlCOPQ6Uu6T8+F2ZqQg+wtsP+WKhxK3QMN9Garcwr7fCRhxA==
-
 htmlparser2@^6.1.0:
   version "6.1.0"
   resolved "https://registry.nlark.com/htmlparser2/download/htmlparser2-6.1.0.tgz#c4d762b6c3371a05dbe65e94ae43a9f845fb8fb7"

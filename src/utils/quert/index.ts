@@ -1,5 +1,5 @@
 import cheerio from 'cheerio';
-import { htmlTagNames } from 'html-tag-names';
+import { htmlTagNames } from './html-tag-names';
 
 const htmlTagSets = new Set(htmlTagNames);
 htmlTagSets.delete('html');
