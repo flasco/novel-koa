@@ -5,6 +5,7 @@ export interface ISiteConfig {
   search: {
     method: string;
     pattern: string;
+    customHeader?: string;
     closeEncode?: string;
     bookList: string;
     bookName: string;

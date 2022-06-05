@@ -2,19 +2,21 @@ import axios from 'axios';
 import https from 'https';
 import { delay } from '.';
 
+const baseHeaders = {
+  'User-Agent':
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36',
+  Connection: 'keep-alive',
+  'content-type': 'application/x-www-form-urlencoded',
+  Referer: 'https://www.baidu.com',
+  cookie: '__asd=1234',
+};
+
 const baseAxios = axios.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
   }),
   responseType: 'arraybuffer', // 不对抓取的数据进行编码解析
-  headers: {
-    'User-Agent':
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36',
-    Connection: 'keep-alive',
-    'content-type': 'application/x-www-form-urlencoded',
-    Referer: 'https://www.baidu.com',
-    cookie: '__asd=1234',
-  },
+  headers: baseHeaders,
 });
 
 const getSource = (timeout: number) => {
@@ -25,10 +27,16 @@ const getSource = (timeout: number) => {
   return source.token;
 };
 
-export async function postCrawl(url: string, payload: any, timeout = 5000) {
+export async function postCrawl(
+  url: string,
+  payload: any,
+  opts: { timeout?: number; headers?: any } = {}
+) {
+  const { timeout = 5000, headers = {} } = opts;
   try {
     const result = await baseAxios.post<Buffer>(url, payload, {
       cancelToken: getSource(timeout),
+      headers: { ...baseHeaders, ...headers },
     });
     return result.data;
   } catch (error) {
@@ -37,10 +45,12 @@ export async function postCrawl(url: string, payload: any, timeout = 5000) {
   }
 }
 
-export async function craw(url: string, timeout = 5000) {
+export async function craw(url: string, opts: { timeout?: number; headers?: any } = {}) {
+  const { timeout = 5000, headers = {} } = opts;
   try {
     const result = await baseAxios.get<Buffer>(url, {
       cancelToken: getSource(timeout),
+      headers: { ...baseHeaders, ...headers },
     });
     return result.data;
   } catch (error) {
