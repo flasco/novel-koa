@@ -54,7 +54,7 @@ export async function craw(url: string, opts: { timeout?: number; headers?: any 
     });
     return result.data;
   } catch (error) {
-    console.trace(error.message, url);
+    console.trace(error, url);
     throw new Error(`craw failed, ${error.message}`);
   }
 }
