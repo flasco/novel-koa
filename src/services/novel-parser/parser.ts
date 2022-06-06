@@ -112,10 +112,6 @@ class BaseParser {
       .replace(/\n+/g, '\n')
       .replace(/\t+/g, '');
 
-    if (text.trim().length < 5) {
-      throw new Error('章节异常');
-    }
-
     const ret = {
       title: htmlAnalysis(base, chapter.title),
       content: text,
