@@ -20,16 +20,23 @@ const initSearchParser = (parserMap: Map<string, Parser>) => {
 
 /** 默认 url 都是经过 supported site 判断的 */
 class NovelServices {
-  supportedSites = ConfigCenter.supportedSites;
   parserMap: Map<string, Parser>;
   searchParsers: Parser[];
+  supportedSites: string[];
   constructor() {
+    this.init();
+    ConfigCenter.addConfigListener(this.init);
+  }
+
+  init = () => {
+    this.supportedSites = ConfigCenter.supportedSites;
+
     this.parserMap = new Map<string, Parser>();
     ConfigCenter.configs.forEach((value, key) => {
       this.parserMap.set(key, new Parser(value));
     });
     this.searchParsers = initSearchParser(this.parserMap);
-  }
+  };
 
   private getParser = (url: string) => {
     const currentSite = this.supportedSites.find(i => url.includes(i));

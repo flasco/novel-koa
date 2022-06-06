@@ -59,6 +59,25 @@ export async function craw(url: string, opts: { timeout?: number; headers?: any 
   }
 }
 
+export async function getCookie(url: string, opts: { timeout?: number; headers?: any } = {}) {
+  const { timeout = 5000, headers = {} } = opts;
+  try {
+    const result = await baseAxios.get<Buffer>(url, {
+      cancelToken: getSource(timeout),
+      headers: { ...baseHeaders, ...headers },
+    });
+
+    const setCookie = (result.headers['set-cookie'] as unknown as string[]) || [];
+
+    const cookie = setCookie?.map(item => item.split('; ')[0] + ';')?.join('');
+
+    return cookie || '';
+  } catch (error) {
+    console.trace(error, url);
+    throw new Error(`get cookie failed, ${error.message}`);
+  }
+}
+
 export async function normalCraw<T = any>(url: string, timeout = 5000) {
   for (let i = 0; i <= 3; i++) {
     try {
